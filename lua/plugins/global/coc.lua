@@ -1,26 +1,17 @@
-local set_keymap = require('lua.utils.init').keymaps.init()
+local set_keymap = require('core.keymaps')
 
 local M = {}
 
 function M.setup()
     vim.g.coc_global_extensions = {
-        -- web dev
-        'coc-html',
-        'coc-css',
-        'coc-tsserver',
-        'coc-phpls',
-        'coc-vue',
-        'coc-angular',
-
         -- android dev
+        'coc-xml',
         'coc-java',
         'coc-kotlin',
         'coc-flutter',
-        'coc-xml',
+        'coc-tsserver',
 
-        -- other
-        'coc-go',
-        'coc-pyright',
+        -- global coc
         'coc-json',
         'coc-eslint',
         'coc-prettier',
@@ -29,6 +20,8 @@ function M.setup()
 
     -- set keymaps khusus coc
     set_keymap('i', '<leader><Space>', 'coc#refresh()', { silent = true })
+    set_keymap('n', '<leader>gd', '<Plug>(coc-definition)', { silent = true })
+    set_keymap('n', '<leader>gr', '<Plug>(coc-references)', { silent = true })
 end
 
 return M

@@ -1,7 +1,15 @@
-local set_keymap = require('utils.init').keymaps.init()
-
 vim.g.mapleader = '/'
 vim.g.localmapleader = '/'
+
+local telescope = require("telescope.builtin")
+
+local set_keymap = function(mode, keys, command, opts)
+    opts = opts or {}
+    opts.noremap = opts.noremap ~= true
+    opts.silent = opts.silent ~= true
+    
+    return vim.keymap.set(mode, keys, command, opts)
+end
 
 -- normal mode
 set_keymap('n', '<leader>x', '"+d$') -- cut
@@ -27,8 +35,18 @@ set_keymap('n', '<leader>l', '<C-w>l') -- nav to window right
 set_keymap('n', '<leader>/', '/') -- text search
 set_keymap('n', '<leader>R', ':%s/\\<<C-r><C-w>\\>/') -- change word on cursor hover
 
+set_keymap('n', '<leader>b', ':NvimTreeToggle<CR>')
+set_keymap('n', '<leader>e', ':NvimTreeFocus<CR>')
+set_keymap('n', '<leader>w', '<C-w>w')
+
+set_keymap('n', '<leader>fg', telescope.find_files, { desc = "Live Grep" })
+set_keymap('n', '<leader>ff', telescope.find_files, { desc = "Find File" })
+
 -- visual mode
 set_keymap('v', '<leader>x', '"+d') -- cut
 set_keymap('v', '<leader>c', '"+y') -- copy
 
 -- insert mode
+
+
+return set_keymap
