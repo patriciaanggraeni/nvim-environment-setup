@@ -26,7 +26,7 @@ function PackageManager:ensure_packer()
     if self.fn.empty(self.fn.glob(self.install_path)) > 0 then
         print('Menginstall packer...')
 
-        self:run_async('git', { 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }, function(success) 
+        self:run_async('git', { 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', self.install_path }, function(success) 
             if success then 
                 vim.cmd[[ packadd packer.nvim ]]
                 print('Berhasil menginstall packer.')
@@ -49,14 +49,29 @@ function PackageManager:init()
         print("Packer tidak ditemukan. Harap instal packer.nvim terlebih dahulu.")
         return
     end
+    
+    packer.init({
+       display = {
+           open_fn = function() 
+               return require('packer.util').float({ border = 'rounded' })
+           end,
+           non_interactive = false,
+           silent = true,
+           keymap = {
+               quit = 'q'
+           },
+           show_all_info = true,
+       }
+    })
 
     packer.startup( function(use) 
         use 'wbthomason/packer.nvim'
-
-        
+        use 'nvim-lua/plenary.nvim'
 
         if packer_bootstrap then
-            packer.sync()
+            vim.defer_fn( function()
+                packer.sync()
+            end, 0)
         end
     end)
 end
@@ -67,39 +82,3 @@ local manager = PackageManager:new({
 })
 
 manager:init()
-
--- require('packer').startup( function (use)
---     use 'wbthomason/packer.nvim'
-
---     use 'williamboman/nvim-lsp-installer'
---     use 'tfnico/vim-gradle'
---     use 'neovim/nvim-lspconfig'
---     use 'nvim-lua/plenary.nvim'
---     use 'lewis6991/gitsigns.nvim'
---     use 'udalov/kotlin-vim'
-    
---     -- cmp plugins
---     use 'hrsh7th/nvim-cmp'
---     use 'hrsh7th/cmp-cmdline'
---     -- use 'hrsh7th/cmp-nvim-lsp'
---     use 'hrsh7th/cmp-buffer'
---     use 'hrsh7th/cmp-path'
---     use 'saadparwaiz1/cmp_luasnip'
-    
---     -- snippet plugins
---     use 'L3MON4D3/LuaSnip'
---     use 'rafamadriz/friendly-snippets'
-    
-
---     -- use 'onsails/lspkind-nvim'
-
---     require('plugins.global.init').setup_lsp()
---     require('plugins.global.init').setup_git()
---     require('plugins.global.init').setup_tree()
---     require('plugins.global.init').setup_telescope()
-
---     -- require('plugins.global.coc').setup()
---     if packer_bootstrap then
---         require('packer').sync()
---     end
--- end)

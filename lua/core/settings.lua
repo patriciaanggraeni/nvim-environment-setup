@@ -58,3 +58,13 @@ vim.cmd('filetype plugin indent on')
 -- set.timeoutlen = 500
 -- set.ttimeoutlen = 10
 -- set.redrawtime = 1000
+
+vim.cmd [[
+    augroup Settings
+        autocmd!
+        autocmd BufWritePost * source <afile>
+    augroup END
+]]
+
+vim.cmd [[ syntax on ]]
+vim.cmd [[ filetype plugin indent on ]]

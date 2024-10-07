@@ -1,7 +1,7 @@
 vim.g.mapleader = '/'
 vim.g.localmapleader = '/'
 
-local telescope = require("telescope.builtin")
+-- local telescope = require("telescope.builtin")
 local M = {}
 
 local set_keymap = function(mode, keys, command, opts)
@@ -40,8 +40,8 @@ set_keymap('n', '<leader>b', ':NvimTreeToggle<CR>')
 set_keymap('n', '<leader>e', ':NvimTreeFocus<CR>')
 set_keymap('n', '<leader>w', '<C-w>w')
 
-set_keymap('n', '<leader>fg', telescope.find_files, { desc = "Live Grep" })
-set_keymap('n', '<leader>ff', telescope.find_files, { desc = "Find File" })
+-- set_keymap('n', '<leader>fg', telescope.find_files, { desc = "Live Grep" })
+-- set_keymap('n', '<leader>ff', telescope.find_files, { desc = "Find File" })
 
 -- visual mode
 set_keymap('v', '<leader>x', '"+d') -- cut
