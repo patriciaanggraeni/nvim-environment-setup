@@ -5,9 +5,10 @@ local ensure_packer = function ()
 
     if fn.empty(fn.glob(install_path)) > 0 then
         print("Menginstall packer...")
-        
+
         fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
         vim.cmd [[ packadd packer.nvim ]]
+
         return true
     end
     return false
@@ -17,13 +18,28 @@ local packer_bootstrap = ensure_packer()
 
 require('packer').startup( function (use)
     use 'wbthomason/packer.nvim'
-    
+
     use 'williamboman/nvim-lsp-installer'
     use 'tfnico/vim-gradle'
     use 'neovim/nvim-lspconfig'
     use 'nvim-lua/plenary.nvim'
     use 'lewis6991/gitsigns.nvim'
     use 'udalov/kotlin-vim'
+    
+    -- cmp plugins
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-cmdline'
+    -- use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'saadparwaiz1/cmp_luasnip'
+    
+    -- snippet plugins
+    use 'L3MON4D3/LuaSnip'
+    use 'rafamadriz/friendly-snippets'
+    
+
+    -- use 'onsails/lspkind-nvim'
 
     require('plugins.global.init').setup_lsp()
     require('plugins.global.init').setup_git()

@@ -1,6 +1,7 @@
 local M = {}
 
 function M.setup_lsp()
+    require('lsp.lsp').setup_lua()
     require('lsp.lsp').setup_kotlin_lsp()
 end
 

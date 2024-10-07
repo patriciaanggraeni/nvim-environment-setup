@@ -2,6 +2,7 @@ vim.g.mapleader = '/'
 vim.g.localmapleader = '/'
 
 local telescope = require("telescope.builtin")
+local M = {}
 
 local set_keymap = function(mode, keys, command, opts)
     opts = opts or {}
@@ -47,6 +48,9 @@ set_keymap('v', '<leader>x', '"+d') -- cut
 set_keymap('v', '<leader>c', '"+y') -- copy
 
 -- insert mode
+-- set_keymap('i', '<leader>t', "cmp.mapping.select_next_item()", { noremap = true, silent = true })
+-- set_keymap('i', '<leader>y', "cmp.mapping.select_prev_item()", { noremap = true, silent = true })
+-- set_keymap('i', '<leader><Space>', "cmp.mapping.complete()", { noremap = true, silent = true })
+-- set_keymap('i', '<CR>', "cmp.mapping.confirm({ select = true })", { noremap = true, silent = true })
 
-
-return set_keymap
+return M

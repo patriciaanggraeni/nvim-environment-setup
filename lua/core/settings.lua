@@ -1,6 +1,9 @@
 local set = vim.opt
 
 -- general config
+set.mouse = ""
+set.guicursor = { "n-v-c:block-blinkon500", "i:block-blinkon500" }
+
 set.backup = false
 set.swapfile = false
 set.writebackup = false
@@ -22,7 +25,7 @@ set.cursorline = true
 set.background = "dark"
 set.termguicolors = true
 
-set.wrap = true
+set.wrap = false
 set.linebreak = true
 set.breakindent = true
 
