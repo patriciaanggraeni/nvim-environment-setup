@@ -4,7 +4,6 @@ Themes.__index = Themes
 local success, packer = pcall(require, 'packer')
 local Job = require('plenary.job')
 
-
 function ThemesManager:new()
     local self = setmetatable({}, Themes)
 
@@ -18,7 +17,6 @@ function ThemesManager:new()
 
     return self
 end
-
 
 function ThemesManager.install_theme()
     local themes = self.theme_list
@@ -68,7 +66,6 @@ function ThemesManager.install_theme()
     end
 end
 
-
 function ThemesManager:setup_theme(theme_name)
     local theme = self.theme_list[theme_name]
 
@@ -86,10 +83,8 @@ function ThemesManager:setup_theme(theme_name)
     print('Tema berhasil diatur ke ' .. theme)
 end
 
-
 local manager = ThemesManager:new()
 manager:install_theme()
-
 
 vim.api.nvim_create_user_command('change-theme', 
     function(args) 
