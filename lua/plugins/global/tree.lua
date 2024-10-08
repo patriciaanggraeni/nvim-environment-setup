@@ -5,7 +5,7 @@ require('packer').use({
 		require('nvim-tree').setup {
 			disable_netrw = true,
 			hijack_netrw = true,
-			update_cwd = true,
+			update_cwd = false,
 			view = {
 				width = 30,
 				side = 'left',
@@ -19,8 +19,8 @@ require('packer').use({
 				dotfiles = true,
 			},
 			update_focused_file = {
-				enable = true,
-				update_cwd = true,
+				enable = false,
+				update_cwd = false,
 			},
 			git = {	
 				enable = true,

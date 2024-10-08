@@ -2,7 +2,6 @@ vim.g.mapleader = '/'
 vim.g.localmapleader = '/'
 
 local telescope = require("telescope.builtin")
-local M = {}
 
 local set_keymap = function(mode, keys, command, opts)
     opts = opts or {}
@@ -43,9 +42,15 @@ set_keymap('n', '<leader>w', '<C-w>w')
 set_keymap('n', '<leader>fg', telescope.find_files, { desc = "Live Grep" })
 set_keymap('n', '<leader>ff', telescope.find_files, { desc = "Find File" })
 
+set_keymap('n', '<leader>t', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true })
+
 -- visual mode
 set_keymap('v', '<leader>x', '"+d') -- cut
 set_keymap('v', '<leader>c', '"+y') -- copy
+
+-- terminal mode
+set_keymap('t', '<leader>t',' <cmd>ToggleTermn<CR>', { noremap = true, silent = true })
+-- set_keymap('t', '<Esc>', [[ <C-\><C-n> ]], { noremap = true, silent = true })
 
 -- insert mode
 -- set_keymap('i', '<leader>t', "cmp.mapping.select_next_item()", { noremap = true, silent = true })

@@ -49,7 +49,13 @@ function PackageManager:init()
         print("Packer tidak ditemukan. Harap instal packer.nvim terlebih dahulu.")
         return
     end
-    
+   
+    local packer_file = vim.fn.stdpath('config') .. '/lua/core/plugins.lua'
+    local last_sync_file = vim.fn.stdpath('data') .. '/.packer_last_sync'
+
+    local last_sync_time = vim.loop.fs_stat(last_sync_file) and vim.loop.fs_stat(last_sync_file).mtime.sec or 0
+    local config_mod_time = vim.loop.fs_stat(packer_file) and vim.loop.fs_stat(packer_file).mtime.sec or 0
+
     packer.init({
        display = {
            open_fn = function() 
@@ -67,18 +73,33 @@ function PackageManager:init()
     packer.startup( function(use) 
         use 'wbthomason/packer.nvim'
         use 'nvim-lua/plenary.nvim'
-        use { "catppuccin/nvim", as = "catppuccin" }
+        use 'feline-nvim/feline.nvim'
+        use { "catppuccin/nvim", as = "catppuccin" } 
+        use { 'akinsho/toggleterm.nvim', tag = '*' }
 
-        
+                
         require('core.themes')
         require('plugins.global.tree')
+        require('plugins.global.feline')
         require('plugins.global.telescope')
+        require('plugins.global.toggleterm')
         if packer_bootstrap then
             vim.defer_fn( function()
                 packer.sync()
             end, 0)
         end
     end)
+
+    if config_mod_time > last_sync_time then
+        print('Menjalankan sinkronasi plugins...')
+        packer.sync()
+
+        local file = io.open(last_sync_file, 'w')
+        if file then
+            file:write(os.time())
+            file:close()
+        end
+    end
 end
 
 local manager = PackageManager:new({
