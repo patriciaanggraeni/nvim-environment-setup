@@ -1,93 +1,55 @@
-local M = {}
-local ThemesManager = {}
-ThemesManager.__index = ThemesManager
+require("catppuccin").setup({
+    flavour = "auto", -- latte, frappe, macchiato, mocha
+    background = { -- :h background
+        light = "latte",
+        dark = "mocha",
+    },
+    transparent_background = true, -- disables setting the background color.
+    show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+    term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+    dim_inactive = {
+        enabled = false, -- dims the background color of inactive window
+        shade = "dark",
+        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+    },
+    no_italic = true, -- Force no italic
+    no_bold = false, -- Force no bold
+    no_underline = false, -- Force no underline
+    styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+        comments = { "italic" }, -- Change the style of comments
+        conditionals = { "italic" },
+        loops = {},
+        functions = {},
+        keywords = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+        -- miscs = {}, -- Uncomment to turn off hard-coded styles
+    },
+    color_overrides = {},
+    custom_highlights = {},
+    default_integrations = true,
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = false,
+        mini = {
+            enabled = true,
+            indentscope_color = "",
+        },
+        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+    },
+})
 
-local success, packer = pcall(require, 'packer')
-local Job = require('plenary.job')
+vim.cmd [[
+    :hi Normal guibg=None
+]]
 
-function ThemesManager:new()
-    local self = setmetatable({}, ThemesManager)
-
-    self.new_theme = false
-    self.installed_themes = {}
-    self.theme_list = {
-        tokyonight = 'folke/tokyonight.nvim',
-        gruvbox = 'morhetz/gruvbox',
-        onedark = 'joshdick/onedark.vim',
-    }
-
-    return self
-end
-
-function ThemesManager:install_theme()
-    local themes = self.theme_list
-
-    if not success then
-        print("Packer tidak ditemukan. Harap instal packer.nvim terlebih dahulu.")
-        return
-    end
-
-    for theme in pairs(themes) do
-        if self.installed_themes[theme] == nil then
-            self.installed_themes[theme] = false
-        end
-    end
-
-    local new_theme = self.new_theme
-    for theme, _ in pairs(themes) do
-        if self.installed_themes[theme] == false then
-            new_theme = true
-            break
-        end
-    end
-
-    if new_theme then
-        vim.notify('Memulai instalasi tema. Mohon tunggu...', vim.log.levels.INFO)
-
-        packer.startup( function(use) 
-            for _, theme in pairs(themes) do
-                use(theme)
-            end
-        end)
-    
-        packer.sync()
-        for theme in pairs(themes) do
-            self.installed_themes[theme] = true
-        end
-        
-        print('Semua tema berhasil dipasang.')
-    else
-        print('Berhasil melakukan sinkronisasi tema.')
-    end
-end
-
-function ThemesManager:setup_theme(theme_name)
-    local theme = self.theme_list[theme_name]
-
-    if not theme then
-        print('Tema ' .. theme .. ' tidak ditemukan!')
-        return
-    end
-
-    if not success then
-        print("Packer tidak ditemukan. Harap instal packer.nvim terlebih dahulu.")
-        return
-    end
-
-    vim.cmd('colorscheme ' .. theme)
-    print('Tema berhasil diatur ke ' .. theme)
-end
-
-function M.init()
-    local manager = ThemesManager:new()
-    manager:install_theme()
-    
-    vim.api.nvim_create_user_command('ChangeTheme', 
-        function(args) 
-            local theme = args.args
-            manager:setup_theme(theme)
-        end, 
-    { nargs = 1 })
-end
-
-return M
+-- setup must be called before loading
+vim.cmd.colorscheme "catppuccin-latte"

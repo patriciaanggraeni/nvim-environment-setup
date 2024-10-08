@@ -68,6 +68,12 @@ function PackageManager:init()
         use 'wbthomason/packer.nvim'
         use 'nvim-lua/plenary.nvim'
 
+        -- colorscheme
+        use { "catppuccin/nvim", as = "catppuccin" }
+
+        
+        require('core.themes')
+
         if packer_bootstrap then
             vim.defer_fn( function()
                 packer.sync()
