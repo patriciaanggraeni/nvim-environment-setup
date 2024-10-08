@@ -67,13 +67,12 @@ function PackageManager:init()
     packer.startup( function(use) 
         use 'wbthomason/packer.nvim'
         use 'nvim-lua/plenary.nvim'
-
-        -- colorscheme
         use { "catppuccin/nvim", as = "catppuccin" }
 
         
         require('core.themes')
-
+        require('plugins.global.tree')
+        require('plugins.global.telescope')
         if packer_bootstrap then
             vim.defer_fn( function()
                 packer.sync()
