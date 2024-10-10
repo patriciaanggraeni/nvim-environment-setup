@@ -4,58 +4,73 @@ vim.g.localmapleader = '/'
 local telescope = require("telescope.builtin")
 
 local set_keymap = function(mode, keys, command, opts)
-    opts = opts or {}
-    opts.noremap = opts.noremap ~= true
-    opts.silent = opts.silent ~= true
-    
+    opts = vim.tbl_extend('force', { noremap = true, silent = true }, opts or {})
     return vim.keymap.set(mode, keys, command, opts)
 end
 
--- normal mode
-set_keymap('n', '<leader>x', '"+d$') -- cut
-set_keymap('n', '<leader>c', '"+y$') -- copy
-set_keymap('n', '<leader>v', '"+p')  -- paste
 
-set_keymap('n', '<leader>z', 'u')     -- undo
-set_keymap('n', '<leader>y', '<C-r>') -- redo
+local keymaps = {
 
-set_keymap('n', '<leader>s', ':w<CR>')  -- save
-set_keymap('n', '<leader>q', ':q<CR>')  -- quit
-set_keymap('n', '<leader>S', ':wq<CR>') -- save & quit
+    -- normal mode
+    { mode = 'n', keys = '<leader>x', command = '"+d$' },
+    { mode = 'n', keys = '<leader>c', command = '"+y$' },
+    { mode = 'n', keys = '<leader>v', command = '"+p' },
 
-set_keymap('n', '<leader>H', ':split<CR>') -- split horizontally
-set_keymap('n', '<leader>V', ':vsplit<CR>') -- split vertically
-set_keymap('n', '<leader>Q', ':close<CR>')  -- close current split
+    { mode = 'n', keys = '<leader>s', command = ':w<CR>' },
+    { mode = 'n', keys = '<leader>q', command = ':q<CR>' },
+    { mode = 'n', keys = '<leader>S', command = ':wq<CR>' }, 
 
-set_keymap('n', '<leader>k', '<C-w>k') -- nav to window up
-set_keymap('n', '<leader>j', '<C-w>j') -- nav to window down
-set_keymap('n', '<leader>h', '<C-w>h') -- nav to window left
-set_keymap('n', '<leader>l', '<C-w>l') -- nav to window right
+    { mode = 'n', keys = '<leader>z', command = 'u' },
+    { mode = 'n', keys = '<leader>y', command = '<C-r>' },
 
-set_keymap('n', '<leader>/', '/') -- text search
-set_keymap('n', '<leader>R', ':%s/\\<<C-r><C-w>\\>/') -- change word on cursor hover
+    { mode = 'n', keys = '<leader>H', command = ':split<CR>' },
+    { mode = 'n', keys = '<leader>V', command = ':vsplit<CR>' },
+    { mode = 'n', keys = '<leader>Q', command = ':close<CR>' },
 
-set_keymap('n', '<leader>b', ':NvimTreeToggle<CR>')
-set_keymap('n', '<leader>e', ':NvimTreeFocus<CR>')
-set_keymap('n', '<leader>w', '<C-w>w')
+    { mode = 'n', keys = '<leader>k', command = '<C-w>k' },
+    { mode = 'n', keys = '<leader>j', command = '<C-w>j' },
+    { mode = 'n', keys = '<leader>h', command = '<C-w>h' },
+    { mode = 'n', keys = '<leader>l', command = '<C-w>l' },
 
-set_keymap('n', '<leader>fg', telescope.find_files, { desc = "Live Grep" })
-set_keymap('n', '<leader>ff', telescope.find_files, { desc = "Find File" })
+    { mode = 'n', keys = '<leader>/', command = '/' },
+    { mode = 'n', keys = '<leader>R', command = ':%s/\\<<C-r><C-w>\\>/' },
+    
 
-set_keymap('n', '<leader>t', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true })
+    -- toggle tree
+    { mode = 'n', keys = '<leader>b', command = ':NvimTreeToggle<CR>' },
+    { mode = 'n', keys = '<leader>e', command = ':NvimTreeFocus<CR>' },
+    { mode = 'n', keys = '<leader>w', command = '<C-w>w' },
 
--- visual mode
-set_keymap('v', '<leader>x', '"+d') -- cut
-set_keymap('v', '<leader>c', '"+y') -- copy
 
--- terminal mode
-set_keymap('t', '<leader>t',' <cmd>ToggleTermn<CR>', { noremap = true, silent = true })
--- set_keymap('t', '<Esc>', [[ <C-\><C-n> ]], { noremap = true, silent = true })
+    -- toggle telescope
+    { mode = 'n', keys = '<leader>fg', command = telescope.find_files, opts = { desc = "Live Grep" } },
+    { mode = 'n', keys = '<leader>ff', command = telescope.find_files, opts = { desc = "Find File" } },
+    
 
--- insert mode
--- set_keymap('i', '<leader>t', "cmp.mapping.select_next_item()", { noremap = true, silent = true })
--- set_keymap('i', '<leader>y', "cmp.mapping.select_prev_item()", { noremap = true, silent = true })
--- set_keymap('i', '<leader><Space>', "cmp.mapping.complete()", { noremap = true, silent = true })
--- set_keymap('i', '<CR>', "cmp.mapping.confirm({ select = true })", { noremap = true, silent = true })
+    -- toggle terminal
+    { mode = 'n', keys = '<leader>t', command = '<cmd>ToggleTerm<CR>' },
 
-return M
+    
+    -- visual mode
+    { mode = 'v', keys = '<leader>x', command = '"+d' },
+    { mode = 'v', keys = '<leader>c', command = '"+y' },
+    { mode = 'v', keys = '<leader>d', command = 'd' },
+
+
+    -- terminal mode
+    { mode = 't', keys = '<leader>t', command = '<cmd>ToggleTermn<CR>' },
+    -- { mode = 't', keys = '<Esc>', command = '<C-\><C-n>' },
+
+
+    -- insert mode
+    -- { mode = 'i', keys = '<leader>t', command = "cmp.mapping.select_next_item()" },
+    -- { mode = 'i', keys = '<leader>y', command = "cmp.mapping.select_prev_item()" },
+    -- { mode = 'i', keys = '<leader><Space>', command = "cmp.mapping.complete()" },
+    -- { mode = 'i', keys = '<CR>', command = "cmp.mapping.confirm({ select = true }) },
+
+}
+
+-- set keymaps
+for _, map in ipairs(keymaps) do
+    set_keymap(map.mode, map.keys, map.command, map.opts)
+end
