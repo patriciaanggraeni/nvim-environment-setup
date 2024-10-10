@@ -30,7 +30,7 @@ function PackageManager:ensure_packer()
             if success then 
                 vim.cmd[[ packadd packer.nvim ]]
                 print('Berhasil menginstall packer.')
-            else 
+            else
                 print('Gagal menginstall packer.')
             end
         end)
@@ -70,19 +70,41 @@ function PackageManager:init()
        }
     })
 
-    packer.startup( function(use) 
+    packer.startup( function(use)
         use 'wbthomason/packer.nvim'
         use 'nvim-lua/plenary.nvim'
         use 'feline-nvim/feline.nvim'
-        use { "catppuccin/nvim", as = "catppuccin" } 
+        use 'neovim/nvim-lspconfig'
+        use 'petertriho/cmp-git'
+        use 'tpope/vim-fugitive'
+        use 'williamboman/nvim-lsp-installer'
+
+        use {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'hrsh7th/nvim-cmp'
+        }
+        use 'L3MON4D3/LuaSnip'
+
+        use { 'catppuccin/nvim', as = "catppuccin" } 
         use { 'akinsho/toggleterm.nvim', tag = '*' }
 
-                
+        -- themes
         require('core.themes')
+
+        
+        -- core plugins
+        require('plugins.global.cmp')
         require('plugins.global.tree')
         require('plugins.global.feline')
         require('plugins.global.telescope')
         require('plugins.global.toggleterm')
+
+        -- lsp config
+        require('plugins.global.lsp.config')
+
         if packer_bootstrap then
             vim.defer_fn( function()
                 packer.sync()

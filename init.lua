@@ -15,9 +15,3 @@ local status_keymaps, error_keymaps = pcall(require, 'core.keymaps')
 if not status_keymaps then
     print('Error loading keymaps: ' .. error_keymaps)
 end
-
--- memuat themese
-local themes_status, error_themes = pcall(require, 'core.themes.themes')
-if not status_keymaps then
-    print('Error loading themes: ' .. error_themes)
-end

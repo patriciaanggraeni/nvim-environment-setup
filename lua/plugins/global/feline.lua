@@ -49,7 +49,14 @@ local c = {
 		right_sep = "block",
 	},
 	gitBranch = {
-		provider = "git_branch",
+		provider = function()
+            local branch = vim.fn.FugitiveHead()
+            if branch ~= '' then
+                return '' .. branch
+            else
+                return ''
+            end
+        end,
 		hl = {
 			fg = "peanut",
 			bg = "darkblue",
@@ -191,7 +198,7 @@ local left = {
 	c.vim_mode,
 	c.gitBranch,
 	c.gitDiffAdded,
-  c.gitDiffRemoved,
+    c.gitDiffRemoved,
 	c.gitDiffChanged,
 	c.separator,
 }
