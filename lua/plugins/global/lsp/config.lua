@@ -14,7 +14,7 @@ end
 
 lspconfig.lua_ls.setup {
     capabilities = capabilities,
-    setttings = {
+    settings = {
         Lua = {
             cmd = {
                'C:\\Users\\yaraneru\\scoop\\apps\\lua-language-server\\3.11.0\\bin\\lua-language-server.exe' 
@@ -23,7 +23,7 @@ lspconfig.lua_ls.setup {
                 version = '5.1',
             },
             diagnostics = {
-                global = { 'vim', },
+                globals = { 'vim', },
             },
             workspace = {
                 library = vim.api.nvim_get_runtime_file("", true),
