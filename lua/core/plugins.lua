@@ -94,7 +94,7 @@ function PackageManager:init()
         -- themes
         require('core.themes')
 
-        
+
         -- core plugins
         require('plugins.global.cmp')
         require('plugins.global.tree')
@@ -103,7 +103,7 @@ function PackageManager:init()
         require('plugins.global.toggleterm')
 
         -- lsp config
-        require('plugins.global.lsp.config')
+        require('plugins.global.lsp.init')
 
         if packer_bootstrap then
             vim.defer_fn( function()

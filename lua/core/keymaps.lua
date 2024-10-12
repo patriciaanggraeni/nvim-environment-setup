@@ -22,6 +22,7 @@ local keymaps = {
 
     { mode = 'n', keys = '<leader>z', command = 'u' },
     { mode = 'n', keys = '<leader>y', command = '<C-r>' },
+    { mode = 'n', keys = '<leader>a', command = 'ggVG' },
 
     { mode = 'n', keys = '<leader>H', command = ':split<CR>' },
     { mode = 'n', keys = '<leader>V', command = ':vsplit<CR>' },
