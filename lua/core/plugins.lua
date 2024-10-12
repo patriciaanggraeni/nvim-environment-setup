@@ -78,7 +78,7 @@ function PackageManager:init()
         use 'petertriho/cmp-git'
         use 'tpope/vim-fugitive'
         use 'williamboman/nvim-lsp-installer'
-
+        use 'nvim-treesitter/nvim-treesitter'
         use {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
@@ -90,6 +90,7 @@ function PackageManager:init()
 
         use { 'catppuccin/nvim', as = "catppuccin" } 
         use { 'akinsho/toggleterm.nvim', tag = '*' }
+
 
         -- themes
         require('core.themes')

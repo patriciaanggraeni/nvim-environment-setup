@@ -50,8 +50,8 @@ local c = {
 	},
 	gitBranch = {
 		provider = function()
-            local branch = vim.fn.FugitiveHead()
-            if branch ~= '' then
+            local status, branch = pcall(vim.fn.FugitiveHead())
+            if status and branch ~= '' then
                 return '' .. branch
             else
                 return ''
