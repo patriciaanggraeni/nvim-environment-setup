@@ -18,7 +18,7 @@ local keymaps = {
 
     { mode = 'n', keys = '<leader>s', command = ':w<CR>' },
     { mode = 'n', keys = '<leader>q', command = ':q<CR>' },
-    { mode = 'n', keys = '<leader>S', command = ':wq<CR>' }, 
+    { mode = 'n', keys = '<leader>S', command = ':wq<CR>' },
 
     { mode = 'n', keys = '<leader>z', command = 'u' },
     { mode = 'n', keys = '<leader>y', command = '<C-r>' },
@@ -34,7 +34,7 @@ local keymaps = {
 
     { mode = 'n', keys = '<leader>/', command = '/' },
     { mode = 'n', keys = '<leader>R', command = ':%s/\\<<C-r><C-w>\\>/' },
-    
+
 
     -- toggle tree
     { mode = 'n', keys = '<leader>b', command = ':NvimTreeToggle<CR>' },
@@ -45,12 +45,12 @@ local keymaps = {
     -- toggle telescope
     { mode = 'n', keys = '<leader>fg', command = telescope.find_files, opts = { desc = "Live Grep" } },
     { mode = 'n', keys = '<leader>ff', command = telescope.find_files, opts = { desc = "Find File" } },
-    
+
 
     -- toggle terminal
     { mode = 'n', keys = '<leader>t', command = '<cmd>ToggleTerm<CR>' },
 
-    
+
     -- visual mode
     { mode = 'v', keys = '<leader>x', command = '"+d' },
     { mode = 'v', keys = '<leader>c', command = '"+y' },
