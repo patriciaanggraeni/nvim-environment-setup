@@ -1,70 +1,85 @@
 local set = vim.opt
+local api = vim.api
+local group = api.nvim_create_augroup("Setting", { clear = true })
 
 -- general config
-set.mouse = ""
-set.guicursor = { "n-v-c:block-blinkon500", "i:block-blinkon500" }
+local general_config = {
+    mouse = "",
+    guicursor = { "n-v-c:block-blinkon500", "i:block-blinkon500" },
+    backup = false,
+    swapfile = false,
+    writebackup = false,
+    fileencoding = "utf-8",
+    clipboard = "unnamedplus",
+    completeopt = "menuone,noinsert,noselect",
+}
 
-set.backup = false
-set.swapfile = false
-set.writebackup = false
+local appearances_config = {
+    number = true,
+    relativenumber = true,
+    splitbelow = true,
+    splitright = true,
+    showmode = true,
+    cursorline = true,
+    background = "dark",
+    termguicolors = true,
+    wrap = false,
+    linebreak = true,
+    breakindent = true,
+}
 
-set.fileencoding = "utf-8"
-set.clipboard = "unnamedplus"
-set.completeopt = "menuone,noinsert,noselect"
+local indentation_config = {
+    tabstop = 4,
+    shiftwidth = 4,
+    smarttab = true,
+    expandtab = true,
+}
 
--- appearances config
-set.number = true
-set.relativenumber = true
+local search_config = {
+    hlsearch = true,
+    smartcase = true,
+    ignorecase = true,
+}
 
-set.splitbelow = true
-set.splitright = true
+local other_config = {
+    updatetime = 300,
+    shortmess:append("sI"),
+    timeoutlen = 500,
+    ttimeoutlen = 10,
+    -- scrolloff = 8,
+    -- undofile = true,
+    -- cmdheight = 2,
+    -- showcmd = true,
+    -- redrawtime = 1000,
+}
 
-set.showmode = true
-set.cursorline = true
+for option, value in pairs(general_config) do
+    set[option] = value
+end
 
-set.background = "dark"
-set.termguicolors = true
+for option, value in pairs(appearances_config) do
+    set[option] = value
+end
 
-set.wrap = false
-set.linebreak = true
-set.breakindent = true
+for option, value in pairs(indentation_config) do
+    set[option] = value
+end
 
--- indentation config
-set.tabstop = 4
-set.shiftwidth = 4
+for option, value in pairs(search_config) do
+    set[option] = value
+end
 
-set.smarttab = true
-set.expandtab = true
+for option, value in pairs(other_config) do
+    set[option] = value
+end
 
--- searching config
-set.hlsearch = true
-set.smartcase = true
-set.ignorecase = true
+api.nvim_exec([[ 
+    syntax on 
+    filetype plugin indent on
+]], false)
 
--- other config
-set.updatetime = 300
-set.shortmess:append("sI")
-
-vim.cmd('syntax on')
-vim.cmd('filetype plugin indent on')
-
--- optional config
--- set.scrolloff = 8
--- set.undofile = true
-
--- set.cmdheight = 2
--- set.showcmd = true
-
--- set.timeoutlen = 500
--- set.ttimeoutlen = 10
--- set.redrawtime = 1000
-
-vim.cmd [[
-    augroup Settings
-        autocmd!
-        autocmd BufWritePost * source <afile>
-    augroup END
-]]
-
-vim.cmd [[ syntax on ]]
-vim.cmd [[ filetype plugin indent on ]]
+api.nvim_create_autocmd("BufWritePost", {
+    group = group,
+    pattern = "*",
+    command = "source <afile>",
+})
