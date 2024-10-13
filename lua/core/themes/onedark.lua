@@ -1,6 +1,6 @@
 require('onedark').setup({
     style = "darker",
-    transparent = false,
+    transparent = true,
     term_colors = true,
     ending_tildes = false,
     cmp_itemkind_reverse = false,
@@ -15,6 +15,13 @@ require('onedark').setup({
         darker = true,
         undercurl = true,
         background = true,
+    },
+    lualine = { transparent = false, },
+    colors = {
+        comment = "#e9ecef",
+    },
+    highlights = {
+        Comment = { fg = '#e9ecef', italic = false, },
     },
 })
 
