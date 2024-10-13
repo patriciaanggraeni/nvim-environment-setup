@@ -3,6 +3,7 @@ local tree = {
 	lazy = false,
 	requires = { 'kyazdani42/nvim-web-devicons', },
 	config = function()
+		vim.cmd([[highlight NvimTreeIgnoredFile guifg=#808080]])
 		require('nvim-tree').setup {
 			disable_netrw = true,
 			hijack_netrw = true,
@@ -24,7 +25,7 @@ local tree = {
 				enable = false,
 				update_cwd = false,
 			},
-			git = {	
+			git = {
 				enable = true,
 				ignore = false,
 				show_on_dirs = true,
