@@ -9,15 +9,25 @@ end
 vim.opt.rtp:prepend(lazy_path)
 
 require('lazy').setup({
-    { 'tpope/vim-fugitive', lazy = false },
+    -- basic plugins
     { 'nvim-lua/plenary.nvim', lazy = false },
     { 'nvim-tree/nvim-tree.lua', lazy = false },
-    { 'feline-nvim/feline.nvim', lazy = true, event = "BufRead" },
-    { 'neovim/nvim-lspconfig', lazy = true, event = "BufReadPre" },
-    { 'petertriho/cmp-git', lazy = true, event = "InsertEnter" },
-    { 'williamboman/nvim-lsp-installer', lazy = true, event = "BufReadPre" },
-    { 'nvim-telescope/telescope.nvim', lazy = true, event = "CmdlineEnter" },
+    { 'nvim-telescope/telescope.nvim', lazy = true },
     { 'nvim-treesitter/nvim-treesitter', lazy = true },
+
+    -- lsp plugins
+    { 'neovim/nvim-lspconfig', lazy = true, event = "BufReadPre" },
+    { 'williamboman/nvim-lsp-installer', lazy = true, event = "BufReadPre" },
+    
+    -- git integraton plugins
+    { 'tpope/vim-fugitive', lazy = false },
+    { 'petertriho/cmp-git', lazy = true, event = "InsertEnter" },
+
+    -- statusline plugins
+    { 'feline-nvim/feline.nvim', lazy = true, event = "BufRead" },
+    { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' } },
+    
+    -- autocompletion plugins
     {
         'hrsh7th/nvim-cmp',
         lazy = true,
@@ -30,10 +40,11 @@ require('lazy').setup({
         }
     },
     { 'L3MON4D3/LuaSnip', lazy = true, event = "InsertEnter" },
+    
+    -- terminal plugins
     { 'akinsho/toggleterm.nvim', lazy = true, cmd = "ToggleTerm" },
 
-
-    -- themes
+    -- colorschemes
     { 'catppuccin/nvim', lazy = false },
     { 'navarasu/onedark.nvim', lazy = false },
     { 'tiagovla/tokyodark.nvim', lazy = false },
@@ -45,12 +56,16 @@ require('lazy').setup({
     { 'diegoulloao/neofusion.nvim', lazy = false },
     { 'maxmx03/fluoromachine.nvim', lazy = false },
 
+    -- active plugins
     require('plugins.global.cmp'),
     require('plugins.global.tree'),
-    require('plugins.global.feline'),
+    require('plugins.global.lualine'),
     require('plugins.global.telescope'),
     require('plugins.global.toggleterm'),
     require('plugins.global.treesitter')
+    
+    -- nonactive plugins
+    -- require('plugins.global.feline'),
 })
 
 require('core.themes.onedark')
