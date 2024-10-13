@@ -29,11 +29,22 @@ require('lazy').setup({
             { 'hrsh7th/cmp-cmdline', lazy = true, event = "CmdlineEnter" },
         }
     },
-    { 'catppuccin/nvim', lazy = false },
     { 'L3MON4D3/LuaSnip', lazy = true, event = "InsertEnter" },
     { 'akinsho/toggleterm.nvim', lazy = true, cmd = "ToggleTerm" },
-    
-    
+
+
+    -- themes
+    { 'catppuccin/nvim', lazy = false },
+    { 'navarasu/onedark.nvim', lazy = false },
+    { 'tiagovla/tokyodark.nvim', lazy = false },
+    { 'Tsuzat/NeoSolarized.nvim', lazy = false },
+    { 'oxfist/night-owl.nvim', lazy = false },
+    { 'bluz71/vim-nightfly-colors', lazy = false },
+    { 'jaredgorski/spacecamp', lazy = false },
+    { 'zenbones-theme/zenbones.nvim', lazy = false },
+    { 'diegoulloao/neofusion.nvim', lazy = false },
+    { 'maxmx03/fluoromachine.nvim', lazy = false },
+
     require('plugins.global.cmp'),
     require('plugins.global.tree'),
     require('plugins.global.feline'),
@@ -42,7 +53,7 @@ require('lazy').setup({
     require('plugins.global.treesitter')
 })
 
-require('core.themes')
+require('core.themes.onedark')
 require('plugins.global.lsp.init')
 
 vim.cmd([[ autocmd User LazyDone ++once lua require('lazy').sync() ]])
