@@ -8,16 +8,17 @@ local tree = {
 			hijack_netrw = true,
 			update_cwd = false,
 			view = {
-				width = 30,
+				width = 35,
 				side = 'left',
 			},
 			renderer = {
 				indent_markers = {
 					enable = true,
 				},
+				highlight_git = true,
 			},
 			filters = {
-				dotfiles = true,
+				dotfiles = false,
 			},
 			update_focused_file = {
 				enable = false,
