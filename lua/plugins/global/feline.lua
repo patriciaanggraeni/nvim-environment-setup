@@ -233,8 +233,16 @@ local components = {
 	},
 }
 
-feline.setup({
-	components = components,
-	theme = one_monokai,
-	vi_mode_colors = vi_mode_colors,
-})
+local status_line = {
+	'feline-nvim/feline.nvim',
+	lazy = true,
+	config = function ()
+		feline.setup({
+			components = components,
+			theme = one_monokai,
+			vi_mode_colors = vi_mode_colors,
+		})
+	end
+}
+
+return status_line

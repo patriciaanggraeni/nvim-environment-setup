@@ -1,5 +1,6 @@
-require('packer').use({
+local tree = {
 	'kyazdani42/nvim-tree.lua',
+	lazy = false,
 	requires = { 'kyazdani42/nvim-web-devicons', },
 	config = function()
 		require('nvim-tree').setup {
@@ -29,4 +30,6 @@ require('packer').use({
 			},
 		}
 	end,
-})
+}
+
+return tree

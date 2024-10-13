@@ -43,7 +43,6 @@ local search_config = {
 
 local other_config = {
     updatetime = 300,
-    shortmess:append("sI"),
     timeoutlen = 500,
     ttimeoutlen = 10,
     -- scrolloff = 8,
@@ -72,6 +71,8 @@ end
 for option, value in pairs(other_config) do
     set[option] = value
 end
+
+-- shortmess:append("sI")
 
 api.nvim_exec([[ 
     syntax on 

@@ -1,9 +1,9 @@
-require('packer').use({
+local telescope = {
     'nvim-telescope/telescope.nvim',
-    run = 'make',
+    lazy = true,
     config = function()
         require('telescope').setup {
-            defaults = { 
+            defaults = {
                 vimgrep_arguments = {
                     'rg',
                     '--color=never',
@@ -24,18 +24,19 @@ require('packer').use({
                     vertical = { preview_height = 0.5 },
                 },
                 file_ignore_patterns = {},
-                generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+                generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
                 path_display = {"truncate"},
                 winblend = 0,
                 border = {},
-                -- borderchars = {'-', '|', '-', '|', '+', '+', '+', '+'}, 
                 color_devicons = true,
                 use_less = true,
                 set_env = { ['COLORTERM'] = 'truecolor' },
-                file_previewer   = require'telescope.previewers'.vim_buffer_cat.new,
-                grep_previewer   = require'telescope.previewers'.vim_buffer_vimgrep.new,
+                file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+                grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
                 qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
             },
         }
     end,
-})
+}
+
+return telescope
