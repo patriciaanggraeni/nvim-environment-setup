@@ -5,9 +5,6 @@ local completion = {
     'hrsh7th/nvim-cmp',
     lazy = true,
     config = function()
-        local cmp = require('cmp')
-        local luasnip = require('luasnip')
-
         cmp.setup {
             snippet = {
                 expand = function(args)
