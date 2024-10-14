@@ -8,7 +8,7 @@ local function load_lsp(server)
             server_module.setup()
         end
     else
-        vim.notify("Error saat memuat lsp: " .. server, vim.log.levels.ERROR)
+        vim.notify("Error saat memuat lsp (global): " .. server, vim.log.levels.ERROR)
     end
 end
 
