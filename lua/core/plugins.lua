@@ -9,66 +9,29 @@ end
 vim.opt.rtp:prepend(lazy_path)
 
 require('lazy').setup({
-    -- basic plugins
-    { 'nvim-lua/plenary.nvim', lazy = false },
-    { 'nvim-tree/nvim-tree.lua', lazy = false },
-    { 'nvim-telescope/telescope.nvim', lazy = true },
-    { 'nvim-treesitter/nvim-treesitter', lazy = true },
+    require('plugins.init').install_core_plugins(),
+    require('plugins.init').install_lsp_plugins(),
+    require('plugins.init').install_git_plugins(),
+    require('plugins.init').install_statusline_plugins(),
+    require('plugins.init').install_autocompletion_plugins(),
 
-    -- lsp plugins
-    { 'neovim/nvim-lspconfig', lazy = true, event = "BufReadPre" },
-    { 'williamboman/nvim-lsp-installer', lazy = true, event = "BufReadPre" },
-    
-    -- git integraton plugins
-    { 'tpope/vim-fugitive', lazy = false },
-    { 'petertriho/cmp-git', lazy = true, event = "InsertEnter" },
+    -- install themes
+    require('core.themes').install(),
 
-    -- statusline plugins
-    { 'feline-nvim/feline.nvim', lazy = true, event = "BufRead" },
-    { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' } },
-    
-    -- autocompletion plugins
-    {
-        'hrsh7th/nvim-cmp',
-        lazy = true,
-        event = "InsertEnter",
-        dependencies = {
-            { 'hrsh7th/cmp-nvim-lsp', lazy = true, event = "InsertEnter" },
-            { 'hrsh7th/cmp-buffer', lazy = true, event = "InsertEnter" },
-            { 'hrsh7th/cmp-path', lazy = true, event = "InsertEnter" },
-            { 'hrsh7th/cmp-cmdline', lazy = true, event = "CmdlineEnter" },
-        }
-    },
-    { 'L3MON4D3/LuaSnip', lazy = true, event = "InsertEnter" },
-    
-    -- terminal plugins
-    { 'akinsho/toggleterm.nvim', lazy = true, cmd = "ToggleTerm" },
+    -- global plugins
+    require('plugins.global.init').setup_plugins(),
 
-    -- colorschemes
-    { 'catppuccin/nvim', lazy = false },
-    { 'navarasu/onedark.nvim', lazy = false },
-    { 'tiagovla/tokyodark.nvim', lazy = false },
-    { 'Tsuzat/NeoSolarized.nvim', lazy = false },
-    { 'oxfist/night-owl.nvim', lazy = false },
-    { 'bluz71/vim-nightfly-colors', lazy = false },
-    { 'jaredgorski/spacecamp', lazy = false },
-    { 'zenbones-theme/zenbones.nvim', lazy = false },
-    { 'diegoulloao/neofusion.nvim', lazy = false },
-    { 'maxmx03/fluoromachine.nvim', lazy = false },
+    -- web development plugins
+    require('plugins.web.init').setup_plugins(),
 
-    -- active plugins
-    require('plugins.global.cmp'),
-    require('plugins.global.tree'),
-    require('plugins.global.lualine'),
-    require('plugins.global.telescope'),
-    require('plugins.global.toggleterm'),
-    require('plugins.global.treesitter')
-    
-    -- nonactive plugins
-    -- require('plugins.global.feline'),
+    -- android development plugins
+    require('plugins.android.init').setup_plugins(),
 })
 
-require('core.themes.onedark')
-require('plugins.global.lsp.init')
+require('core.themes').load_theme()
+
+require('plugins.global.init').initializing_lsp()
+require('plugins.web.init').initializing_lsp()
+require('plugins.android.init').initializing_lsp()
 
 vim.cmd([[ autocmd User LazyDone ++once lua require('lazy').sync() ]])
