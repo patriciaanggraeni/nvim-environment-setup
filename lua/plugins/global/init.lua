@@ -4,6 +4,7 @@ function M.setup_plugins()
     return {
         { require('plugins.global.config.cmp') },
         { require('plugins.global.config.tree') },
+        { require('plugins.global.config.nonels') },
         { require('plugins.global.config.lualine') },
         { require('plugins.global.config.telescope') },
         { require('plugins.global.config.toggleterm') },

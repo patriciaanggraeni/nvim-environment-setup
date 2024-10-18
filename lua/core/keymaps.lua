@@ -8,6 +8,16 @@ local set_keymap = function(mode, keys, command, opts)
     return vim.keymap.set(mode, keys, command, opts)
 end
 
+local toggle_term_command = function()
+    if vim.fn.mode() == 't' then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", true)
+    end
+    vim.cmd('ToggleTerm')
+end
+
+local toggle_close_terminal = function()
+    vim.cmd('ToggleTerm')
+end
 
 local keymaps = {
 
@@ -36,39 +46,28 @@ local keymaps = {
     { mode = 'n', keys = '<leader>/', command = '/' },
     { mode = 'n', keys = '<leader>R', command = ':%s/\\<<C-r><C-w>\\>/' },
 
-
-    -- toggle tree
     { mode = 'n', keys = '<leader>b', command = ':NvimTreeToggle<CR>' },
     { mode = 'n', keys = '<leader>e', command = ':NvimTreeFocus<CR>' },
     { mode = 'n', keys = '<leader>w', command = '<C-w>w' },
 
-
-    -- toggle telescope
     { mode = 'n', keys = '<leader>fg', command = telescope.find_files, opts = { desc = "Live Grep" } },
     { mode = 'n', keys = '<leader>ff', command = telescope.find_files, opts = { desc = "Find File" } },
 
+    { mode = 'n', keys = '<leader>t', command = toggle_term_command }, 
 
-    -- toggle terminal
-    { mode = 'n', keys = '<leader>t', command = '<cmd>ToggleTerm<CR>' },
-
-
-    -- visual mode
     { mode = 'v', keys = '<leader>x', command = '"+d' },
     { mode = 'v', keys = '<leader>c', command = '"+y' },
     { mode = 'v', keys = '<leader>d', command = 'd' },
 
-
     -- terminal mode
-    { mode = 't', keys = '<leader>t', command = '<cmd>ToggleTermn<CR>' },
-    -- { mode = 't', keys = '<Esc>', command = '<C-\><C-n>' },
-
+    { mode = 't', keys = '<esc>', command = [[ <C-\><C-n> ]] },
+    { mode = 't', keys = '<leader>q', command = toggle_close_terminal, opts = { noremap = true, silent = true } },
 
     -- insert mode
     -- { mode = 'i', keys = '<leader>t', command = "cmp.mapping.select_next_item()" },
     -- { mode = 'i', keys = '<leader>y', command = "cmp.mapping.select_prev_item()" },
     -- { mode = 'i', keys = '<leader><Space>', command = "cmp.mapping.complete()" },
     -- { mode = 'i', keys = '<CR>', command = "cmp.mapping.confirm({ select = true }) },
-
 }
 
 -- set keymaps

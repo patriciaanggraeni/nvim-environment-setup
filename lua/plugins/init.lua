@@ -12,6 +12,7 @@ end
 
 function Plugins.install_lsp_plugins()
     return {
+        { 'nvimtools/none-ls.nvim', lazy = true },
         { 'neovim/nvim-lspconfig', lazy = true, event = "BufReadPre" },
         { 'williamboman/nvim-lsp-installer', lazy = true, event = "BufReadPre" },
     }
