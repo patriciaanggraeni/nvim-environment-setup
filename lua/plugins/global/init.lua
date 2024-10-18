@@ -7,6 +7,7 @@ function M.setup_plugins()
         { require('plugins.global.config.nonels') },
         { require('plugins.global.config.lualine') },
         { require('plugins.global.config.autopairs') },
+        { require('plugins.global.config.blankline') },
         { require('plugins.global.config.telescope') },
         { require('plugins.global.config.toggleterm') },
         { require('plugins.global.config.treesitter') },

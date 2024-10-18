@@ -8,6 +8,7 @@ function Plugins.install_core_plugins()
         { 'nvim-treesitter/nvim-treesitter', lazy = true },
         { 'akinsho/toggleterm.nvim', lazy = true, cmd = "ToggleTerm" },
         { 'windwp/nvim-autopairs', lazy = true, event = 'InsertEnter' },
+        { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} }
     }
 end
 

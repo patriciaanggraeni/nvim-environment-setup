@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup_plugins()
     return {
-        { require('lua.plugins.web.plugins.emmet') },
+        { require('plugins.web.plugins.emmet') },
     }
 end
 
