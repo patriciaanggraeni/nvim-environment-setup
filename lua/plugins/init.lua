@@ -7,6 +7,7 @@ function Plugins.install_core_plugins()
         { 'nvim-telescope/telescope.nvim', lazy = true },
         { 'nvim-treesitter/nvim-treesitter', lazy = true },
         { 'akinsho/toggleterm.nvim', lazy = true, cmd = "ToggleTerm" },
+        { 'windwp/nvim-autopairs', lazy = true, event = 'InsertEnter' },
     }
 end
 
