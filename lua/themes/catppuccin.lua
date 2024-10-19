@@ -1,8 +1,8 @@
 require("catppuccin").setup({
-    flavour = "latte",
+    flavour = "frappe",
     background = {
         light = "latte",
-        dark = "mocha",
+        dark = "frappe",
     },
     transparent_background = true,
     show_end_of_buffer = false,
@@ -16,8 +16,8 @@ require("catppuccin").setup({
     no_bold = false,
     no_underline = false,
     styles = {
-        comments = { "italic" },
-        conditionals = { "italic" },
+        comments = {},
+        conditionals = {},
         loops = {},
         functions = {},
         keywords = {},
@@ -28,7 +28,6 @@ require("catppuccin").setup({
         properties = {},
         types = {},
         operators = {},
-        miscs = {},
     },
     color_overrides = {},
     custom_highlights = {},
@@ -46,4 +45,4 @@ require("catppuccin").setup({
     },
 })
 
-vim.cmd.colorscheme "catppuccin-latte"
+vim.cmd.colorscheme "catppuccin-frappe"

@@ -1,5 +1,5 @@
-local servers_path = 'plugins.web.lsp.servers'
-local servers_dir = vim.fn.stdpath('config') .. '/lua/plugins/web/lsp/servers'
+local servers_path = 'plugins.config.lsp.servers'
+local servers_dir = vim.fn.stdpath('config') .. '/lua/plugins/config/lsp/servers'
 
 local function load_lsp(server)
     local ok, server_module = pcall(require, servers_path .. '.' .. server)
@@ -8,7 +8,7 @@ local function load_lsp(server)
             server_module.setup()
         end
     else
-        vim.notify("Error saat memuat lsp (web): " .. server, vim.log.levels.ERROR)
+        vim.notify("Error saat memuat lsp (global): " .. server, vim.log.levels.ERROR)
     end
 end
 
