@@ -16,6 +16,7 @@ function Plugins.install_global_plugins()
         { 'petertriho/cmp-git', event = 'InsertEnter' },
         { 'lewis6991/gitsigns.nvim', event = { 'BufReadPre', 'BufNewFile' } },
         { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' } },
+        { 'rcarriga/nvim-notify' },
         {
             'hrsh7th/nvim-cmp',
             event = 'InsertEnter',
@@ -34,6 +35,7 @@ function Plugins.setup_global_plugins()
     return {
         { require('plugins.config.cmp') },
         { require('plugins.config.tree') },
+        { require('plugins.config.notify') },
         { require('plugins.config.nonels') },
         { require('plugins.config.lualine') },
         { require('plugins.config.gitsigns') },

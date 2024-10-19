@@ -53,7 +53,9 @@ local keymaps = {
     { mode = 'n', keys = '<leader>fg', command = telescope.find_files, opts = { desc = "Live Grep" } },
     { mode = 'n', keys = '<leader>ff', command = telescope.find_files, opts = { desc = "Find File" } },
 
-    { mode = 'n', keys = '<leader>t', command = toggle_term_command }, 
+    { mode = 'n', keys = '<leader>t', command = toggle_term_command },
+
+    { mode = 'n', keys = '<leader>ls', command = ':lua lazy_sync()<CR>', opts = { noremap = true, silent = true } },
 
     { mode = 'v', keys = '<leader>x', command = '"+d' },
     { mode = 'v', keys = '<leader>c', command = '"+y' },
