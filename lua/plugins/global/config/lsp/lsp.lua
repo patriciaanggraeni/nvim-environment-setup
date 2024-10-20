@@ -1,5 +1,5 @@
-local servers_path = 'plugins.config.lsp.servers'
-local servers_dir = vim.fn.stdpath('config') .. '/lua/plugins/config/lsp/servers'
+local servers_path = 'plugins.global.config.lsp.servers'
+local servers_dir = vim.fn.stdpath('config') .. '/lua/plugins/global/config/lsp/servers'
 
 local function load_lsp(server)
     local ok, server_module = pcall(require, servers_path .. '.' .. server)

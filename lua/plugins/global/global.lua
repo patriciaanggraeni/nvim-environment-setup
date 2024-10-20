@@ -34,23 +34,23 @@ end
 
 function Plugins.setup_global_plugins()
     return {
-        { require('plugins.config.cmp') },
-        { require('plugins.config.tree') },
-        { require('plugins.config.notify') },
-        { require('plugins.config.nonels') },
-        { require('plugins.config.lualine') },
-        { require('plugins.config.comment') },
-        { require('plugins.config.gitsigns') },
-        { require('plugins.config.autopairs') },
-        { require('plugins.config.blankline') },
-        { require('plugins.config.telescope') },
-        { require('plugins.config.treesitter') },
-        { require('plugins.config.toggleterm') },
+        { require('plugins.global.config.cmp') },
+        { require('plugins.global.config.tree') },
+        { require('plugins.global.config.notify') },
+        { require('plugins.global.config.nonels') },
+        { require('plugins.global.config.lualine') },
+        { require('plugins.global.config.comment') },
+        { require('plugins.global.config.gitsigns') },
+        { require('plugins.global.config.autopairs') },
+        { require('plugins.global.config.blankline') },
+        { require('plugins.global.config.telescope') },
+        { require('plugins.global.config.treesitter') },
+        { require('plugins.global.config.toggleterm') },
     }
 end
 
 function Plugins.initializing_lsp()
-    require('plugins.config.lsp.lsp')
+    require('plugins.global.config.lsp.lsp')
 end
 
 return Plugins

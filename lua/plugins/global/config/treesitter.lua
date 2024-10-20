@@ -44,6 +44,7 @@ local treesitter =  {
                     },
                 },
             },
+            autotag = { enable = true, },
             modules = {},
             ignore_install = { 'lua' },
         }

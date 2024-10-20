@@ -17,13 +17,17 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  spec = {
-    { require('core.themes').install() },
-    { require('plugins.global').install_global_plugins() },
-    { require('plugins.global').setup_global_plugins() },
-  },
-  checker = { enabled = true },
+    spec = {
+        { require('core.themes').install() },
+        
+        { require('plugins.global.global').install_global_plugins() },
+        { require('plugins.web.web').install_web_plugins() },
+
+        { require('plugins.global.global').setup_global_plugins() },
+        { require('plugins.web.web').setup_web_plugins() },
+    },
+    checker = { enabled = true },
 })
 
 require('core.themes').load_theme()
-require('plugins.global').initializing_lsp()
+require('plugins.global.global').initializing_lsp()
