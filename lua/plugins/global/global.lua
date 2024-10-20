@@ -6,6 +6,10 @@ function Plugins.install_global_plugins()
         { 'nvimtools/none-ls.nvim' },
         { 'nvim-tree/nvim-tree.lua' },
         { 'nvim-telescope/telescope.nvim' },
+        {
+            'nvim-telescope/telescope-file-browser.nvim',
+            dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' }
+        },
         { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm' },
         { 'nvim-treesitter/nvim-treesitter', event = { 'BufReadPre', 'BufNewFile' } },
         { 'windwp/nvim-autopairs', event = 'InsertEnter' },

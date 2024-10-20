@@ -2,7 +2,11 @@ local telescope = {
     'nvim-telescope/telescope.nvim',
     lazy = true,
     config = function()
-        require('telescope').setup {
+        local telescope = require('telescope')
+        local action = require('telescope.actions')
+        local file_brower = require('telescope').extensions.file_browser
+
+        telescope.setup {
             defaults = {
                 vimgrep_arguments = {
                     'rg',
@@ -20,8 +24,12 @@ local telescope = {
                 sorting_strategy = "ascending",
                 layout_strategy = "horizontal",
                 layout_config = {
-                    horizontal = { preview_width = 0.6 },
-                    vertical = { preview_height = 0.5 },
+                    horizontal = {
+                        prompt_position = 'top',
+                    },
+                    vertical = {
+                        prompt_position = 'top',
+                    },
                 },
                 file_ignore_patterns = {},
                 generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
@@ -35,7 +43,36 @@ local telescope = {
                 grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
                 qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
             },
+            extensions = {
+                file_browser = {
+                    theme = 'dropdown',
+                    hijack_netrw = true,
+                    mappings = {
+                        ['n'] = {
+                            ['<leader>n'] = file_brower.actions.create,
+                            ['<leader>\\'] = file_brower.actions.goto_parent_dir,
+                            ['/'] = function ()
+                                vim.cmd [[ startinsert ]]
+                            end,
+                            ['<leader>u'] = function (prompt)
+                                for i = 1, 10 do
+                                    action.move_selection_previous(prompt)
+                                end
+                            end,
+                            ['<leader>i'] = function (prompt)
+                                for i = 1, 10 do
+                                    action.move_selection_next(prompt)
+                                end
+                            end,
+                            ['<PageUp>'] = action.preview_scrolling_up,
+                            ['<PageDown>'] = action.preview_scrolling_down
+                        },
+                    },
+                },
+            },
         }
+
+        require('telescope').load_extension('file_browser')
     end,
 }
 

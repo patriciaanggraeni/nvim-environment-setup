@@ -50,8 +50,11 @@ local keymaps = {
     { mode = 'n', keys = '<leader>e', command = ':NvimTreeFocus<CR>' },
     { mode = 'n', keys = '<leader>w', command = '<C-w>w' },
 
-    { mode = 'n', keys = '<leader>fg', command = telescope.find_files, opts = { desc = "Live Grep" } },
-    { mode = 'n', keys = '<leader>ff', command = telescope.find_files, opts = { desc = "Find File" } },
+    { mode = 'n', keys = '<leader>fg', command = telescope.find_files, opts = { desc = 'Live Grep' } },
+    { mode = 'n', keys = '<leader>ff', command = telescope.find_files, opts = { desc = 'Find File' } },
+    { mode = 'n', keys = '<leader>fb', command = function()
+        require('telescope').extensions.file_browser.file_browser()
+    end, opts = { desc = 'File Browser' } },
 
     { mode = 'n', keys = '<leader>t', command = toggle_term_command },
 

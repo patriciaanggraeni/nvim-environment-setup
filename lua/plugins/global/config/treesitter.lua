@@ -5,7 +5,7 @@ local treesitter =  {
     config = function()
         require('nvim-treesitter.configs').setup {
             ensure_installed = { 
-                "javascript", "typescript", "java", "kotlin", 
+                "javascript", "typescript", "java", "kotlin",
                 "html", "css", "scss", "vue", "python", "dart",
                 "json", "yaml", "xml", "angular", "tsx",
                 "markdown", "markdown_inline", "php", "sql",
