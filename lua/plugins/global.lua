@@ -17,6 +17,7 @@ function Plugins.install_global_plugins()
         { 'lewis6991/gitsigns.nvim', event = { 'BufReadPre', 'BufNewFile' } },
         { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' } },
         { 'rcarriga/nvim-notify' },
+        { 'numToStr/Comment.nvim' },
         {
             'hrsh7th/nvim-cmp',
             event = 'InsertEnter',
@@ -38,6 +39,7 @@ function Plugins.setup_global_plugins()
         { require('plugins.config.notify') },
         { require('plugins.config.nonels') },
         { require('plugins.config.lualine') },
+        { require('plugins.config.comment') },
         { require('plugins.config.gitsigns') },
         { require('plugins.config.autopairs') },
         { require('plugins.config.blankline') },
